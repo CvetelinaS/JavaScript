@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Hamburger menu</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <label>
+    <h1>List of items</h1>
+    <ul id='items'></ul>
+    
+    <input type="text" id="newText">
+    <input type="button" value='Add' onclick="addItem()">
+    </label>
+    <script>
+        function addItem() {
+            let newContent = document.getElementById('newText').value;
+            let listItem = document.createElement('li');
+            let ul = document.getElementById('items');
+
+            listItem.appendChild(document.createTextNode(newContent + ""));
+            let span = document.createElement('span');
+            span.innerHTML = '<a href="#" >[Delete]</a>';
+            span.addEventListener('click', deleteItem);
+
+            listItem.appendChild(span);
+            ul.appendChild(listItem);
+            document.getElementById('items').appendChild(listItem);
+            document.getElementById('newText').value = '';
+        }
+
+        function deleteItem() {
+            let currentItem = this.parentNode;
+
+            let ulremove = currentItem.parentNode;
+            ulremove.removeChild(currentItem);
+
+            //ul > li > span > a ; parent > parent > parent > this
+        }
+    </script>
+</body>
